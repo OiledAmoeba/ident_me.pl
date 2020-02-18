@@ -4,13 +4,15 @@ use warnings;
 use Term::ReadKey;
 my $key;
 
-my $file = print "Do you want me to write the output to a file? (y/n)";
+print "Do you want me to write the output to a file? (y/n) ";
+my $file = <STDIN>;
 (die "Give only y or n") if ($file ne "y" || $file ne "n");
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
 my $v6 = `curl -s 'https://v6.ident.me/'`;
 if ($file eq "y") {
-    my $outputfile = print "Where to store the output? (Default: ./ident.txt)";
+    print "Where to store the output? (Default: ./ident.txt) ";
+    my $outputfile = <STDIN>;
     ($outputfile = "./ident.txt") if ($outputfile eq "");
     `touch $outputfile` or die "Can't create file: $!\nDo you have write access to the directory?";
     open my $OUT, '>', $outputfile or die "Can't open file: $!\nDo you have write access to the file?";
@@ -21,7 +23,7 @@ if ($file eq "y") {
     print $OUT "whois of $v4:\n",`whois $v4`,"\n";
     print $OUT "whois of $v6:\n",`whois $v6`,"\n";
     close $OUT;
-    print "Done. See $outputfile for the result."
+    print "Done. See $outputfile for the result.\n"
 } elsif ($file eq "n") {
     print "Your external IPv4 is $v4\n";
     print "Your external IPv6 is $v6\n\n";
