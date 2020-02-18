@@ -12,7 +12,7 @@ if ($key ne "y" || $key ne "n") {
     print "Give only y or n\n";
     exit(0);
 };
-
+my $file = $key;
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
 my $v6 = `curl -s 'https://v6.ident.me/'`;
