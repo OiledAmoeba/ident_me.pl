@@ -6,6 +6,7 @@ my $key;
 
 print "Do you want me to write the output to a file? (y/n) ";
 my $file = <STDIN>;
+chomp $file;
 (die "Give only y or n") if ($file ne "y" || $file ne "n");
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
@@ -13,6 +14,7 @@ my $v6 = `curl -s 'https://v6.ident.me/'`;
 if ($file eq "y") {
     print "Where to store the output? (Default: ./ident.txt) ";
     my $outputfile = <STDIN>;
+    chomp $outputfile;
     ($outputfile = "./ident.txt") if ($outputfile eq "");
     `touch $outputfile` or die "Can't create file: $!\nDo you have write access to the directory?";
     open my $OUT, '>', $outputfile or die "Can't open file: $!\nDo you have write access to the file?";
