@@ -6,7 +6,7 @@ my $key;
 
 sub start {
     print "Do you want me to write the output to a file? (y/n/c) ";
-    chomp(my $file = <STDIN>);
+    chomp($file = <STDIN>);
     if ($file ne "y" || $file ne "n" || $file ne "c") {
         print "Give only y or n (or c to cancel)\n";
         $file = "";
@@ -17,7 +17,7 @@ sub start {
     };
 };
 
-(start()) if ($file eq "");
+(start()) if (my $file eq "");
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
 my $v6 = `curl -s 'https://v6.ident.me/'`;
