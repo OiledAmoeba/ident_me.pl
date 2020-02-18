@@ -4,12 +4,12 @@ use warnings;
 use Term::ReadKey;
 my $key;
 
-print "Do you want me to write the output to a file? (y/n) ";
+print "Do you want me to write the output to a file? (y/n)";
 ReadMode('cbreak');
 $key = ReadKey(0);
 ReadMode('normal');
 if ($key ne "y" || $key ne "n") {
-    print "Give only y or n\n";
+    print "\nGive only y or n\n";
     exit(0);
 };
 my $file = $key;
