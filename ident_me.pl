@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use Term::ReadKey;
 my $key;
+my $file;
 
 sub start {
     print "Do you want me to write the output to a file? (y/n/c) ";
@@ -17,7 +18,7 @@ sub start {
     };
 };
 
-(start()) if (my $file eq "");
+(start()) if ($file eq "");
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
 my $v6 = `curl -s 'https://v6.ident.me/'`;
