@@ -7,8 +7,8 @@ my $key;
 print "Do you want me to write the output to a file? (y/n) ";
 my $file = <STDIN>;
 chomp $file;
-if ($file ne "y" || $file ne "n") {
-    print "Give only y or n\n", "Content of '$file' is: ",$file;
+if ($file ne ("y"||"n")) {
+    print "Give only y or n\n";
     exit(0);
 };
 
