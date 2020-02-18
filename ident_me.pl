@@ -5,13 +5,17 @@ use Term::ReadKey;
 my $key;
 
 print "Do you want me to write the output to a file? (y/n)";
-ReadMode('cbreak');
-$key = ReadKey(0);
-ReadMode('normal');
-if ($key ne "y" || $key ne "n") {
-    print "\nGive only y or n\n";
-    exit(0);
-};
+ReadMode 4; # change to raw input mode
+my $key = '';
+while($key !~ /(Y|N)/i) {
+    1 while defined ReadKey -1; # discard any previous input
+    print "Type Y/N: ";
+    $key = ReadKey 0; # read a single character
+    print "$key\n";
+}
+ReadMode 0; # reset the terminal to normal mode
+print "\nYou typed: $key\n";
+
 my $file = $key;
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
