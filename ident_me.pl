@@ -4,16 +4,19 @@ use warnings;
 use Term::ReadKey;
 my $key;
 
-print "Do you want me to write the output to a file? (y/n/c) ";
-chomp(my $file = <STDIN>);
-if ($file ne "y" || $file ne "n") {
-    print "Give only y or n (or c to cancel)\n";
-    $file = "";
+sub start {
+    print "Do you want me to write the output to a file? (y/n/c) ";
+    chomp(my $file = <STDIN>);
+    if ($file ne "y" || $file ne "n" || $file ne "c") {
+        print "Give only y or n (or c to cancel)\n";
+        $file = "";
+    };
     if ($file eq "c") {
         print "Canceled. Bye\n";
         exit(0);
     };
 };
+
 (start()) if ($file eq "");
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
