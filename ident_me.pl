@@ -18,7 +18,7 @@ my $file = $key;
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
 my $v6 = `curl -s 'https://v6.ident.me/'`;
-if ($file !~ /(Y)/i) {
+if ($file eq "y") {
     print "Where to store the output? (Default: ./ident.txt) ";
     my $outputfile = <STDIN>;
     chomp $outputfile;
@@ -32,7 +32,7 @@ if ($file !~ /(Y)/i) {
     print $OUT "whois of $v6:\n",`whois $v6`,"\n";
     close $OUT;
     print "Done. See ",$outputfile," for the result.\n"
-} elsif ($file !~ /(N)/i) {
+} elsif ($file eq "n") {
     print "Your external IPv4 is $v4\n";
     print "Your external IPv6 is $v6\n\n";
     print "Press 'q' to exit or any other key for PTR-Records\n";
