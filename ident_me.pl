@@ -15,7 +15,7 @@ if ($file eq "y") {
     my $outputfile = <STDIN>;
     chomp $outputfile;
     ($outputfile = "./ident.txt") if ($outputfile eq "");
-    `touch $outputfile` or die "Can't create file: $!\nDo you have write access to the directory?";
+    #`touch $outputfile` or die "Can't create file: $!\nDo you have write access to the directory?";
     open my $OUT, '>', $outputfile or die "Can't open file: $!\nDo you have write access to the file?";
     print $OUT "Your external IPv4 is $v4\n";
     print $OUT "Your external IPv6 is $v6\n\n";
