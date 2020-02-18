@@ -5,9 +5,10 @@ use Term::ReadKey;
 my $key;
 
 print "Do you want me to write the output to a file? (y/n) ";
-my $file = <STDIN>;
-chomp $file;
-if (($file ne "y") || ($file ne "n")) {
+ReadMode('cbreak');
+$key = ReadKey(0);
+ReadMode('normal');
+if ($key ne "y" || $key ne "n") {
     print "Give only y or n\n";
     exit(0);
 };
