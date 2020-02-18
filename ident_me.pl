@@ -5,9 +5,10 @@ use Term::ReadKey;
 my $key;
 
 print "Do you want me to write the output to a file? (y/n) ";
-chomp(my $file = <STDIN>);
+my $file = <STDIN>;
+chomp $file;
 if ($file ne "y" || $file ne "n") {
-    print "Give only y or n\n";
+    print "Give only y or n\n", "Content of '$file' is: ",$file;
     exit(0);
 };
 
@@ -27,7 +28,7 @@ if ($file eq "y") {
     print $OUT "whois of $v4:\n",`whois $v4`,"\n";
     print $OUT "whois of $v6:\n",`whois $v6`,"\n";
     close $OUT;
-    print "Done. See $outputfile for the result.\n"
+    print "Done. See ",$outputfile," for the result.\n"
 } elsif ($file eq "n") {
     print "Your external IPv4 is $v4\n";
     print "Your external IPv6 is $v6\n\n";
