@@ -3,22 +3,14 @@ use strict;
 use warnings;
 use Term::ReadKey;
 my $key;
-my $file;
 
-sub start {
-    print "Do you want me to write the output to a file? (y/n/c) ";
-    chomp($file = <STDIN>);
-    if ($file ne "y" || $file ne "n" || $file ne "c") {
-        print "Give only y or n (or c to cancel)\n";
-        $file = "";
-    };
-    if ($file eq "c") {
-        print "Canceled. Bye\n";
-        exit(0);
-    };
+print "Do you want me to write the output to a file? (y/n) ";
+chomp(my $file = <STDIN>);
+if ($file ne "y" || $file ne "n") {
+    print "Give only y or n\n";
+    exit(0);
 };
 
-(start()) if ($file eq "");
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
 my $v6 = `curl -s 'https://v6.ident.me/'`;
