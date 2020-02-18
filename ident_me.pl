@@ -4,9 +4,17 @@ use warnings;
 use Term::ReadKey;
 my $key;
 
-print "Do you want me to write the output to a file? (y/n) ";
+print "Do you want me to write the output to a file? (y/n/c) ";
 chomp(my $file = <STDIN>);
-#(die "Give only y or n") if ($file ne "y" || $file ne "n");
+if ($file ne "y" || $file ne "n") {
+    print "Give only y or n (or c to cancel)\n";
+    $file = "";
+    if ($file eq "c") {
+        print "Canceled. Bye\n";
+        exit(0);
+    };
+};
+(start()) if ($file eq "");
 print "Checking addresses. Be patient\n";
 my $v4 = `curl -s 'https://v4.ident.me/'`;
 my $v6 = `curl -s 'https://v6.ident.me/'`;
@@ -15,7 +23,6 @@ if ($file eq "y") {
     my $outputfile = <STDIN>;
     chomp $outputfile;
     ($outputfile = "./ident.txt") if ($outputfile eq "");
-    #`touch $outputfile` or die "Can't create file: $!\nDo you have write access to the directory?";
     open my $OUT, '>', $outputfile or die "Can't open file: $!\nDo you have write access to the file?";
     print $OUT "Your external IPv4 is $v4\n";
     print $OUT "Your external IPv6 is $v6\n\n";
